@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Organ Details - Organ Finder</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            background: linear-gradient(to right, #f0f4f8, #d9e2ec);
+            font-family: Arial, sans-serif;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            width: 320px;
+            text-align: center;
+        }
+        h2, h3 {
+            background: #5c67f2;
+            color: white;
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        .box {
+            background: #eef2ff;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+            display: none;
+        }
+        li {
+            background: white;
+            margin: 5px 0;
+            padding: 8px;
+            border-radius: 5px;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Organ Details</h2>
+        <div class="box">
+            <label for="organ">Required Organ:</label>
+            <select id="organ" onchange="showHospitals()">
+                <option value="">--Select Organ--</option>
+                <option value="Kidney">Kidney</option>
+                <option value="Liver">Liver</option>
+                <option value="Heart">Heart</option>
+                <option value="Lungs">Lungs</option>
+            </select>
+        </div>
+        <h3>Available Hospitals</h3>
+        <div class="box">
+            <ul id="hospital-list">
+                <!-- Hospitals will appear here after organ selection -->
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        function showHospitals() {
+            // Get the selected organ
+            const organ = document.getElementById('organ').value;
+            const hospitalList = document.getElementById('hospital-list');
+            
+            // Clear any previous hospital list
+            hospitalList.innerHTML = '';
+
+            // Only show hospitals if an organ is selected
+            if (organ) {
+                const hospitals = getHospitalsForOrgan(organ);
+                
+                // Loop through hospitals and add them to the list
+                hospitals.forEach(function(hospital) {
+                    const li = document.createElement('li');
+                    li.textContent = hospital;
+                    hospitalList.appendChild(li);
+                });
+
+                // Show the hospital list
+                hospitalList.style.display = 'block';
+            } else {
+                // Hide hospital list if no organ is selected
+                hospitalList.style.display = 'none';
+            }
+        }
+
+        // This function returns the hospitals based on the organ selected
+        function getHospitalsForOrgan(organ) {
+            switch (organ) {
+                case 'Kidney':
+                    return ['Apollo Hospital', 'Fortis Healthcare', 'AIIMS Delhi', 'Medanta Hospital'];
+                case 'Liver':
+                    return ['Max Healthcare', 'Sree Chitra Hospital', 'Fortis Healthcare'];
+                case 'Heart':
+                    return ['AIIMS Delhi', 'Fortis Heart Institute', 'Heart Care Hospital'];
+                case 'Lungs':
+                    return ['Kokilaben Dhirubhai Ambani Hospital', 'Medanta Hospital', 'Max Healthcare'];
+                default:
+                    return [];
+            }
+        }
+    </script>
+</body>
+</html>
