@@ -3,84 +3,243 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Success</title>
+    <title>Account Created Successfully - Organ Finder</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --primary: #4a6fa5;
+            --secondary: #166088;
+            --accent: #4fc3a1;
+            --light: #f8f9fa;
+            --dark: #343a40;
+            --success: #2a9d8f;
+        }
+        
         body {
-            background: linear-gradient(to right, #e0f7fa, #80deea);
+            background: linear-gradient(135deg, #e3f2fd, #bbdefb);
             font-family: 'Poppins', sans-serif;
-            text-align: center;
+            color: var(--dark);
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
-        .message-box {
-            background: white;
-            padding: 40px;
-            border-radius: 12px;
-            box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
             text-align: center;
-            width: 350px;
-            animation: fadeIn 0.8s ease-in-out;
         }
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+
+        .success-container {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px 50px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            width: 450px;
+            max-width: 90%;
+            position: relative;
+            z-index: 10;
+            transition: transform 0.3s ease;
         }
-        .success-icon {
-            font-size: 60px;
-            color: #28a745;
-            margin-bottom: 10px;
+
+        .success-container:hover {
+            transform: translateY(-5px);
         }
-        h1 {
-            color: #333;
-            font-size: 28px;
-            font-weight: bold;
-            margin-bottom: 10px;
+
+        .success-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background: linear-gradient(to right, var(--success), var(--accent));
+            border-radius: 20px 20px 0 0;
         }
-        p {
-            font-size: 16px;
-            color: #555;
-            margin-bottom: 20px;
+
+        .check-circle {
+            width: 100px;
+            height: 100px;
+            background-color: var(--success);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 25px;
+            animation: scaleIn 0.5s ease-out;
         }
-        .button-container {
-            margin-top: 20px;
-        }
-        button {
-            background: linear-gradient(to right, #5c67f2, #3d4fc2);
+
+        .check-circle i {
             color: white;
-            padding: 12px 26px;
+            font-size: 50px;
+        }
+
+        @keyframes scaleIn {
+            0% {
+                transform: scale(0);
+                opacity: 0;
+            }
+            80% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        h1 {
+            color: var(--success);
+            margin-bottom: 15px;
+            font-size: 2rem;
+        }
+
+        p {
+            color: var(--dark);
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .next-button {
+            background: linear-gradient(to right, var(--success), var(--accent));
+            color: white;
+            padding: 15px 30px;
             border: none;
-            border-radius: 30px;
+            border-radius: 10px;
             cursor: pointer;
             font-size: 16px;
             font-weight: 600;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-            transition: all 0.3s ease-in-out;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
         }
-        button:hover {
-            background: linear-gradient(to right, #3d4fc2, #1e2a78);
-            transform: translateY(-2px);
-            box-shadow: 0px 6px 14px rgba(0, 0, 0, 0.25);
+
+        .next-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+            background: linear-gradient(to right, var(--accent), var(--success));
+        }
+
+        .next-button:active {
+            transform: translateY(0);
+        }
+
+        .next-button::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, rgba(255,255,255,0.3), rgba(255,255,255,0));
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        }
+
+        .next-button:hover::after {
+            transform: translateX(100%);
+        }
+
+        /* Floating organs background */
+        .floating-organs {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .organ {
+            position: absolute;
+            opacity: 0.1;
+            animation: float 15s infinite linear;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-20px) rotate(180deg);
+            }
+            100% {
+                transform: translateY(0) rotate(360deg);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .success-container {
+                padding: 30px 20px;
+            }
+            
+            .check-circle {
+                width: 80px;
+                height: 80px;
+            }
+            
+            .check-circle i {
+                font-size: 40px;
+            }
+            
+            h1 {
+                font-size: 1.5rem;
+            }
+            
+            p {
+                font-size: 1rem;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="message-box">
-        <div class="success-icon">✔️</div>
-        <h1>Congratulations!</h1>
-        <p>Your account has been successfully created.</p>
-        <div class="button-container">
-            <button onclick="window.location.href='organ.html'">Next</button>
-        </div>
+    <!-- Floating organs background -->
+    <div class="floating-organs">
+        <img src="https://cdn-icons-png.flaticon.com/512/3052/3052033.png" class="organ" style="width: 80px; top: 10%; left: 5%; animation-delay: 0s;">
+        <img src="https://cdn-icons-png.flaticon.com/512/3052/3052041.png" class="organ" style="width: 60px; top: 70%; left: 10%; animation-delay: 2s;">
+        <img src="https://cdn-icons-png.flaticon.com/512/3052/3052025.png" class="organ" style="width: 70px; top: 30%; left: 80%; animation-delay: 4s;">
+        <img src="https://cdn-icons-png.flaticon.com/512/3052/3052031.png" class="organ" style="width: 50px; top: 80%; left: 75%; animation-delay: 6s;">
     </div>
+
+    <div class="success-container">
+        <div class="check-circle">
+            <i class="fas fa-check"></i>
+        </div>
+        <h1>Account Created Successfully!</h1>
+        <p>Thank you for joining Organ Finder. You can now explore our platform and find the organs you need.</p>
+        <button class="next-button" onclick="window.location.href='organ.html'">Continue to Organ Finder</button>
+    </div>
+
+    <script>
+        // Add floating organ elements dynamically
+        document.addEventListener('DOMContentLoaded', function() {
+            const floatingOrgs = document.querySelector('.floating-organs');
+            const organIcons = [
+                'https://cdn-icons-png.flaticon.com/512/3052/3052033.png', // heart
+                'https://cdn-icons-png.flaticon.com/512/3052/3052041.png', // kidney
+                'https://cdn-icons-png.flaticon.com/512/3052/3052025.png', // liver
+                'https://cdn-icons-png.flaticon.com/512/3052/3052031.png', // lung
+                'https://cdn-icons-png.flaticon.com/512/3052/3052037.png'  // pancreas
+            ];
+            
+            for (let i = 0; i < 8; i++) {
+                const organ = document.createElement('img');
+                organ.src = organIcons[Math.floor(Math.random() * organIcons.length)];
+                organ.className = 'organ';
+                organ.style.width = `${Math.random() * 30 + 40}px`;
+                organ.style.top = `${Math.random() * 80 + 10}%`;
+                organ.style.left = `${Math.random() * 80 + 10}%`;
+                organ.style.animationDelay = `${Math.random() * 10}s`;
+                organ.style.animationDuration = `${Math.random() * 10 + 10}s`;
+                floatingOrgs.appendChild(organ);
+            }
+        });
+    </script>
 </body>
 </html>
