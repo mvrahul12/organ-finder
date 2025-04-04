@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Organ Finder - Connecting Lives Through Donation</title>
+    <title>Organ Finder</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
     <style>
         :root {
@@ -289,8 +289,8 @@
     </div>
 
     <div class="button-container">
-        <button class="btn" onclick="nextPage('login.html')">Join Our Mission</button>
-        <p style="color: var(--secondary); font-size: 0.9rem;"></p>
+        <button class="btn" onclick="window.location.href='login.html'">Get Started</button>
+        <p style="color: var(--secondary); font-size: 0.9rem;">Every registration can save up to 8 lives</p>
     </div>
 
     <div class="floating-organs">
@@ -301,10 +301,6 @@
     </div>
 
     <script>
-        function nextPage(url) {
-            window.location.href = url;
-        }
-        
         // Add floating organ elements dynamically
         document.addEventListener('DOMContentLoaded', function() {
             const floatingOrgs = document.querySelector('.floating-organs');
